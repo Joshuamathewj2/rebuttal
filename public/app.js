@@ -157,7 +157,7 @@ function renderCase(a) {
           <div class="options">
             ${a.economics.options.map((o) => `<button class="opt" data-opt="${o.id}" aria-pressed="${o.id === a.plan.id}">
               <span><span class="t">${esc(o.label)}</span> ${o.id === a.economics.recommended ? '<span class="rec">recommended</span>' : ''}</span>
-              <span class="ev ${o.ev < 0 ? 'neg' : ''}">${o.ev >= 0 ? '+' : ''}${usd(o.ev)}</span>
+              <span class="ev ${o.ev < 0 ? 'neg' : ''}">${o.ev >= 0 ? '+' : '-'}${usd(Math.abs(o.ev))}</span>
               <span class="x">${esc(o.detail)}</span>
             </button>`).join('')}
           </div>

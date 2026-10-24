@@ -6,6 +6,8 @@ Built for the [PayPal AI Hackathon](https://paypalaihackathon.devpost.com/) (Oct
 
 ---
 
+![Rebuttal case view](docs/screenshot-case.png)
+
 ## The problem
 
 Disputes are a tax that falls hardest on small sellers.
@@ -35,6 +37,11 @@ None of these answers the seller's actual question: **"Should I fight this one, 
 6. **Triage by urgency.** The queue is ordered by money at stake against time left, and anything due within 24 hours goes to the top, because a missed deadline is an automatic loss.
 
 ## Demo
+
+| Grounded draft | Options in dollars |
+|---|---|
+| ![](docs/screenshot-grounded-draft.png) | ![](docs/screenshot-options.png) |
+
 
 - Video: _see the Devpost submission_
 - Run it locally in about a minute (below). No keys are needed: it starts in mock mode with a fictional ceramics shop and six realistic disputes, and the AI steps fall back to a deterministic rules engine.
