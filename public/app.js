@@ -69,8 +69,10 @@ async function loadQueue() {
     </button>`;
   };
   const done = q.other.filter((r) => !r.needsOrder);
+  const sent = q.waiting.map((r) => `<button class="qcard" data-id="${esc(r.dispute_id)}" aria-current="${r.dispute_id === state.selected}"><div class="qrow"><span class="qreason">${esc(r.reason_label)}</span><span class="qamt">${usd(r.amount)}</span></div><div class="qmeta">${esc(r.buyer)}</div><div class="qfoot"><span class="badge b-green">${r.status === 'UNDER_REVIEW' ? 'evidence sent - PayPal reviewing' : 'offer sent - waiting on buyer'}</span></div></button>`).join('');
   $('#queue').innerHTML = `<div class="qsection">Needs a decision - most urgent first</div>` + q.open.map(card).join('') +
     (q.open.length ? '' : '<div class="empty">Nothing waiting. Nice.</div>') +
+    (sent ? `<div class="qsection">Sent - waiting on PayPal or buyer</div>${sent}` : '') +
     (done.length ? `<div class="qsection">Resolved</div>` + done.map((r) => `<div class="qcard"><div class="qrow"><span class="qreason">${esc(r.reason_label)}</span><span class="qamt">${usd(r.amount)}</span></div><div class="qmeta">${esc(r.buyer)} - ${esc((r.outcome || r.status).toLowerCase().replaceAll('_', ' '))}</div></div>`).join('') : '');
   document.querySelectorAll('.qcard[data-id]').forEach((b) => b.addEventListener('click', () => openCase(b.dataset.id)));
   if (!state.selected && q.open[0]) openCase(q.open[0].dispute_id);
@@ -185,7 +187,7 @@ function renderCase(a) {
             ${a.order.fulfillment?.tracking_number && !a.order.fulfillment.uploaded_to_paypal ? `<li><span class="n">${a.actions.length + 1}</span><div>Push ${esc(a.order.fulfillment.carrier)} tracking to PayPal so this can't happen again<code>POST /v1/shipping/trackers-batch</code></div></li>` : ''}
           </ol>
           <div class="approve" style="margin-top:14px">
-            <button class="btn" id="approve" ${a.grounding.ok ? '' : 'disabled'}>Approve and send to PayPal</button>
+            <button class="btn" id="approve" ${a.grounding.ok && !resolved ? '' : 'disabled'}>${resolved ? 'Already sent to PayPal' : 'Approve and send to PayPal'}</button>
             <a class="btn ghost" href="/api/disputes/${encodeURIComponent(d.dispute_id)}/packet.pdf?option=${a.plan.id}" target="_blank" rel="noopener">Preview evidence PDF</a>
           </div>
           <div id="result" style="margin-top:12px"></div>
@@ -222,7 +224,7 @@ function renderCase(a) {
 
   document.querySelectorAll('.opt').forEach((b) => b.addEventListener('click', () => openCase(d.dispute_id, b.dataset.opt)));
   document.querySelectorAll('.cite[data-ex]').forEach((b) => b.addEventListener('click', () => flashExhibit(b.dataset.ex)));
-  document.querySelectorAll('.sent [contenteditable]').forEach((el) => el.addEventListener('input', () => { $('#approve').disabled = false; $('#ground').className = 'ground'; $('#ground').textContent = 'Edited - the grounding check runs again when you approve.'; }));
+  document.querySelectorAll('.sent [contenteditable]').forEach((el) => el.addEventListener('input', () => { $('#approve').disabled = resolved; $('#ground').className = 'ground'; $('#ground').textContent = 'Edited - the grounding check runs again when you approve.'; }));
   $('#approve').addEventListener('click', approve);
 }
 

@@ -124,3 +124,7 @@ Store order records ──> order  ──┘        │
 ## License
 
 MIT, see [LICENSE](LICENSE).
+
+## Re-recording the demo video
+
+`scripts/video/` holds the narration text, a Windows TTS renderer, a Playwright recorder and an ffmpeg muxer, so the demo video is reproducible from the code: `tts.ps1` -> `record.mjs` (needs `npm i playwright`) -> `mux.py` (needs `pip install imageio-ffmpeg`).

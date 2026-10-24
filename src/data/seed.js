@@ -234,7 +234,7 @@ export const disputes = [
     messages: [{ at: at(-5, 11), text: 'One of the two mugs arrived chipped on the rim and is unusable. The other one is fine.' }],
   }),
   dispute({
-    id: 'PP-D-1004', tx: '9HB21733LK0045218', reason: 'UNAUTHORISED', stage: 'CHARGEBACK', status: 'UNDER_REVIEW',
+    id: 'PP-D-1004', tx: '9HB21733LK0045218', reason: 'UNAUTHORISED', stage: 'CHARGEBACK',
     created: at(-3, 16), due: at(4, 23),
     messages: [],
   }),

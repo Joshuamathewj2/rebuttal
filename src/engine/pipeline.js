@@ -74,8 +74,10 @@ export class Rebuttal {
   async queue() {
     const disputes = await this.paypal.listDisputes();
     const rows = disputes.map((d) => this.summary(d));
-    const open = rows.filter((r) => r.status !== 'RESOLVED' && !r.needsOrder).sort((a, b) => b.urgency - a.urgency);
-    return { open, other: rows.filter((r) => r.status === 'RESOLVED' || r.needsOrder) };
+    const needsSeller = (r) => ['OPEN', 'WAITING_FOR_SELLER_RESPONSE'].includes(r.status) && !r.needsOrder;
+    const open = rows.filter(needsSeller).sort((a, b) => b.urgency - a.urgency);
+    const waiting = rows.filter((r) => !needsSeller(r) && r.status !== 'RESOLVED' && !r.needsOrder);
+    return { open, waiting, other: rows.filter((r) => r.status === 'RESOLVED' || r.needsOrder) };
   }
 
   async analyze(id, { option } = {}) {
