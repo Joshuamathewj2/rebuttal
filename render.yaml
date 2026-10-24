@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: rebuttal
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/status
+    envVars:
+      - key: PAYPAL_MODE
+        value: mock
+      - key: ANTHROPIC_API_KEY
+        sync: false

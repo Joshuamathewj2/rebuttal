@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rebuttal - dispute defense for PayPal sellers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23173a63'/><path d='M10 8h8a5 5 0 0 1 0 10h-3l6 7h-4.5L11 18.5V25h-1z' fill='%23f6f3ec'/></svg>" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">R</span>
+      <div>
+        <div class="name">Rebuttal</div>
+        <div class="tag">Dispute defense for PayPal sellers</div>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-tab="queue" aria-selected="true">Disputes</button>
+      <button role="tab" data-tab="prevention">Prevention</button>
+      <button role="tab" data-tab="insights">Insights</button>
+      <button role="tab" data-tab="activity">Activity</button>
+    </nav>
+    <div class="env" id="env"></div>
+  </header>
+
+  <main>
+    <section id="tab-queue" class="tab">
+      <div class="kpis" id="kpis"></div>
+      <div class="split">
+        <aside class="queue" id="queue" aria-label="Dispute queue"></aside>
+        <article class="case" id="case">
+          <div class="empty">Select a dispute to see the case.</div>
+        </article>
+      </div>
+    </section>
+    <section id="tab-prevention" class="tab" hidden></section>
+    <section id="tab-insights" class="tab" hidden></section>
+    <section id="tab-activity" class="tab" hidden></section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

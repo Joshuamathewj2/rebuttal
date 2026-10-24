@@ -1,0 +1,22 @@
+{
+  "name": "rebuttal",
+  "version": "1.0.0",
+  "description": "AI dispute defense co-pilot for PayPal sellers: triage, grounded evidence packets, and one-click responses via the PayPal Disputes API.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test \"test/**/*.test.js\""
+  },
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
+    "dotenv": "^18.0.9",
+    "express": "^4.22.3",
+    "pdfkit": "^0.20.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
